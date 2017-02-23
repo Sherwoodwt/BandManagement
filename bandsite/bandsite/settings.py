@@ -84,6 +84,9 @@ DATABASES = {
         'HOST': 'bandmanagerimproved.cgpcwklvtbcv.us-west-2.rds.amazonaws.com',
         'USER': 'JuanChunk',
         'PORT': 3306,
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
     }
 }
 
