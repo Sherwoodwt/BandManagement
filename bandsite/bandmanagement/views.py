@@ -3,12 +3,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponseRedirect, HttpResponse
 
 from bandmanagement.models import Band
+from bandmanagement.forms import BandForm
 
 # Create your views here.
 def list_bands(request):
     '''will kill this eventually'''
-    user = request.user
-    bands = Band.objects.filter(created_by=user)
+    bands = Band.objects.all()
     context = {
         'band_list': bands
     }
@@ -16,8 +16,15 @@ def list_bands(request):
 
 def create_band(request):
     '''create a band model'''
-
-    return HttpResponse('I am alive')
+    form = BandForm(request.POST or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.created_by = request.user
+        instance.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'create.html', context)
 
 def edit_band(request):
     '''create a band model'''

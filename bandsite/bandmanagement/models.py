@@ -23,4 +23,4 @@ class Member(models.Model):
     picture_url = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username

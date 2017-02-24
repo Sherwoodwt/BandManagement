@@ -4,28 +4,17 @@
     Your Bands
 {% endblock %}
 {% block content %}
-    <a>+Add</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Created By</th>
-            </tr>
-        </thead>
-        {% for band in band_list %}
-            <tbody>
-                <tr class="row">
-                    <td>
-                        <a href="{% url 'viewBand' band_id=band.id %}">
-                            {{band.name}}
-                        </a>
-                    </td>
-                    <td>{{band.picture_url}}</td>
-                    <td>{{band.created_by}}</td>
-                </tr>
-            </tbody>
-        {% endfor %}
-    </table>
+    <div class="page-header">
+        <a class="btn btn-default" href="{%url 'createBand'%}" role="button">add+</a>
+        <h1>Bands</h1>
+        <small>List of all bands</small>
+    </div>
+    
+    <div class="list-group">
+        {%for band in band_list%}
+            <a href="{% url 'viewBand' band_id=band.id %}" class="list-group-item">{{band.name}}</a>
+        {%endfor%}
+    </div>
+
 {% endblock %}

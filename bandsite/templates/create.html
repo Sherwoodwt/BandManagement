@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Band
+{% endblock %}
+{% block content %}
+
+    
+    <div class="page-header">
+        <h1>Band</h1>
+        <small>Save Band</small>
+    </div>
+    
+    
+    <form action="" method="POST" role="form">
+        {%csrf_token%}
+        <legend>Form title</legend>
+        
+        {{form.as_p}}
+    
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+
+{% endblock %}
