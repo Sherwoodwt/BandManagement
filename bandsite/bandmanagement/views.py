@@ -1,23 +1,37 @@
 '''views for band management'''
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponseRedirect, HttpResponse
 
+from bandmanagement.models import Band
+
 # Create your views here.
-def initialView(request):
+def list_bands(request):
     '''will kill this eventually'''
-    return HttpResponse('I am alive')
+    user = request.user
+    bands = Band.objects.filter(created_by=user)
+    context = {
+        'band_list': bands
+    }
+    return render(request, 'list_page.html', context)
 
 def create_band(request):
     '''create a band model'''
+
     return HttpResponse('I am alive')
 
 def edit_band(request):
     '''create a band model'''
     return HttpResponse('I am alive')
 
-def view_band(request):
+def view_band(request, band_id):
     '''create a band model'''
-    return HttpResponse('I am alive')
+    band = get_object_or_404(Band, pk=band_id)
+    members = band.member_set.all()
+    context = {
+        'band': band,
+        'member_list': members,
+    }
+    return render(request, 'detail_page.html', context)
 
 def delete_band(request):
     '''create a band model'''

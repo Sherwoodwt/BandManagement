@@ -11,6 +11,7 @@ class Band(models.Model):
     '''Band model to hold data that all joined members can interact with'''
     name = models.CharField(max_length=100)
     picture_url = models.CharField(max_length=100)
+    created_by = models.ForeignKey(User)
 
     def __str__(self):
         return self.name

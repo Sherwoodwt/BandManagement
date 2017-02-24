@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Your Bands
+{% endblock %}
+{% block content %}
+    <a>+Add</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Picture</th>
+                <th>Created By</th>
+            </tr>
+        </thead>
+        {% for band in band_list %}
+            <tbody>
+                <tr class="row">
+                    <td>
+                        <a href="{% url 'viewBand' band_id=band.id %}">
+                            {{band.name}}
+                        </a>
+                    </td>
+                    <td>{{band.picture_url}}</td>
+                    <td>{{band.created_by}}</td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

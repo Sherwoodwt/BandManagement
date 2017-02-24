@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ band.name }}
+{% endblock %}
+{% block content %}
+    <a href="{% url 'listBands' %}">back</a>
+    <div>
+        <h1>{{band.name}}</h1>
+        <p>{{band.picture_url}}</p>
+    </div>
+    <div>
+        created by: {{band.created_by}}
+        <ul>
+            {% for member in member_list %}
+                <li>{{ member.user.username }}</li>
+            {% endfor %}
+        </ul>
+        <a>edit</a>
+        <a>delete</a>
+    </div>
+{% endblock %}

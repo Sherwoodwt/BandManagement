@@ -16,10 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from bandmanagement.views import initialView
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^bandmanagement/', initialView),
+    url(r'^bandmanagement/', include('bandmanagement.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls'))
 ]
