@@ -18,7 +18,7 @@
         {%endfor%}
     </div>
 
-    <a class="btn btn-default" href="{% url 'listBands' %}" role="button">edit</a>
+    <a class="btn btn-default" href="{% url 'editBand' band_id=band.id %}" role="button">edit</a>
     <a class="btn btn-danger" href="{% url 'deleteBand' band_id=band.id %}" role="button">delete</a>
 
 {% endblock %}

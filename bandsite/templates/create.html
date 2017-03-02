@@ -8,15 +8,22 @@
     
     <div class="page-header">
         <h1>Band</h1>
-        <small>Save Band</small>
+        <small>{{reason}} Band</small>
     </div>
     
     
     <form action="" method="POST" role="form">
         {%csrf_token%}
-        <legend>Form title</legend>
+        <legend>
+            {%if band%}
+                {{band.name}}
+            {%else%}
+                New Band
+            {%endif%}
+        </legend>
         
-        {{form.as_p}}
+        {{form.name}}
+        {{form.picture_url}}
     
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

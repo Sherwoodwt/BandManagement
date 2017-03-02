@@ -27,14 +27,27 @@ def create_band(request):
         instance.save()
         return HttpResponseRedirect(reverse('listBands'))
     context = {
-        'form': form
+        'form': form,
+        'reason': 'Create',
     }
     return render(request, 'create.html', context)
 
 @login_required
-def edit_band(request):
+def edit_band(request, band_id=None):
     '''edit a band model'''
-    return HttpResponse('I am alive')
+    band = get_object_or_404(Band, pk=band_id)
+    if band_id:
+        form = BandForm(request.POST or None, instance=band)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(reverse('viewBand', kwargs={'band_id': band_id}))
+    context = {
+        'form': form,
+        'reason': 'Edit',
+        'band': band,
+    }
+    return render(request, 'create.html', context)
 
 @login_required
 def view_band(request, band_id):
@@ -51,5 +64,6 @@ def view_band(request, band_id):
 def delete_band(request, band_id):
     '''delete a band model'''
     band = get_object_or_404(Band, pk=band_id)
-    band.delete()
+    if(band.created_by == request.user):
+        band.delete()
     return HttpResponseRedirect(reverse('listBands'))
