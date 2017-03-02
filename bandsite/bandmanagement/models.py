@@ -18,9 +18,10 @@ class Band(models.Model):
 
 class Member(models.Model):
     '''Wrapper around User model that is part of a band and can relate to band things'''
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     band = models.ForeignKey(Band, on_delete=models.CASCADE)
+    display_name = models.CharField(max_length=300)
     picture_url = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.user.username
+        return self.display_name

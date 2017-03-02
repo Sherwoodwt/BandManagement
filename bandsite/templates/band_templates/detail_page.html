@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ band.name }}
+{% endblock %}
+{% block content %}
+    
+    <div class="page-header">
+      <a class="btn btn-default" href="{% url 'listBands' %}" role="button">back</a>
+      <h1>{{band.name}}</h1>
+      <small>{{band.picture_url}}</small>
+    </div>
+
+    <div>
+        {%if is_member%}
+            <h3>You are in this band.</h3>
+        {%else%}
+            <h3>You are not in this band.</h3>
+            <a class="btn btn-default" href="{% url 'addMember' band_id=band.id %}" role="button">join</a>
+        {%endif%}
+        <h3></h3>
+        <div class="list-group">
+            <label>Members</label>
+            {% for member in member_list %}
+                <a href="{% url 'viewMember' member_id=member.id %}" class="list-group-item">{{member}}</a>
+            {%endfor%}
+        </div>
+    </div>
+
+    <a class="btn btn-default" href="{% url 'editBand' band_id=band.id %}" role="button">edit</a>
+    <a class="btn btn-danger" href="{% url 'deleteBand' band_id=band.id %}" role="button">delete</a>
+
+{% endblock %}
