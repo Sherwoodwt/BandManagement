@@ -14,9 +14,18 @@
     <div>
         {%if is_member%}
             <h3>You are in this band.</h3>
+            <a
+                class="btn btn-xs btn-danger"
+                href="{% url 'deleteMember' member_id=member_id %}"
+                role="button"
+            >leave</a>
         {%else%}
             <h3>You are not in this band.</h3>
-            <a class="btn btn-default" href="{% url 'addMember' band_id=band.id %}" role="button">join</a>
+            <a
+                class="btn btn-primary"
+                href="{% url 'addMember' band_id=band.id %}"
+                role="button"
+            >join</a>
         {%endif%}
         <h3></h3>
         <div class="list-group">

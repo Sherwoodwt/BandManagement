@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from bandsite.secret_settings import DB_PASSWORD, HIDDEN_SECRET_KEY
 
+current_stage = '/dev/'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,7 +28,7 @@ SECRET_KEY = HIDDEN_SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['xojejia1z2.execute-api.us-west-2.amazonaws.com', 'localhost']
 
 
 # Application definition
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'registration',
     'bandmanagement',
+    'taskmanagement',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +135,7 @@ STATIC_URL = '/static/'
 REGISTRATION_OPEN = True        # If True, users can register
 ACCOUNT_ACTIVATION_DAYS = 7     # activation window
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/bandmanagement/'  # After successful log in
-LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
+LOGIN_REDIRECT_URL = current_stage + 'bandmanagement/'  # After successful log in
+LOGIN_URL = current_stage + 'accounts/login/'  # The page users are directed to if they are not logged in,
                                 # and are trying to access pages requiring authentication
 

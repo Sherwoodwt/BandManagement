@@ -57,15 +57,18 @@ def view_band(request, band_id):
     band = get_object_or_404(Band, pk=band_id)
     members = band.member_set.all()
     is_member = False
+    member_id = None
 
     for member in members:
         if member.user == request.user:
             is_member = True
+            member_id = member.pk
             break
 
     context = {
         'band': band,
         'member_list': members,
+        'member_id': member_id,
         'is_member': is_member,
     }
     return render(request, 'band_templates/detail_page.html', context)
@@ -90,7 +93,7 @@ def add_member(request, band_id):
         instance.user = request.user
         instance.band = band
         instance.save()
-        return HttpResponseRedirect(reverse('viewMember', kwargs={'member_id': instance.pk}))
+        return HttpResponseRedirect(reverse('viewBand', kwargs={'band_id': band_id}))
     context = {
         'form': form,
         'band': band,
@@ -116,8 +119,9 @@ def edit_member(request, member_id):
 @login_required
 def delete_member(request, member_id):
     member = get_object_or_404(Member, pk=member_id)
+    band = member.band
     if(member.user == request.user):
         member.delete()
-        return HttpResponseRedirect(reverse('listBands'))
+        return HttpResponseRedirect(reverse('viewBand', kwargs={'band_id': band.pk}))
     return HttpResponse('You can only delete members that you created!')
 
