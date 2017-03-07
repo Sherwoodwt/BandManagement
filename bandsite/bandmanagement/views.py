@@ -12,7 +12,7 @@ from bandmanagement.forms import BandForm, MemberCreateForm
 # Band Views
 @login_required
 def list_bands(request):
-    '''will kill this eventually'''
+    '''list of all bands'''
     bands = Band.objects.all()
     context = {
         'band_list': bands
@@ -89,7 +89,6 @@ def add_member(request, band_id):
     form = MemberCreateForm(request.POST or None, initial={'display_name': request.user.username})
     if form.is_valid():
         instance = form.save(commit=False)
-        print(instance.picture_url + " is the url")
         instance.user = request.user
         instance.band = band
         instance.save()

@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from bandmanagement.views import (
     list_bands,
@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^member/(?P<member_id>[0-9]+)/$', view_member, name='viewMember'),
     url(r'^member/(?P<member_id>[0-9]+)/edit/$', edit_member, name='editMember'),
     url(r'^member/(?P<member_id>[0-9]+)/delete/$', delete_member, name='deleteMember'),
+    url(r'^(?P<band_id>[0-9]+)/task/', include('taskmanagement.urls')),
 ]
