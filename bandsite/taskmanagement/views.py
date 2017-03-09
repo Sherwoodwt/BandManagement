@@ -8,7 +8,7 @@ from taskmanagement.forms import TaskForm
 from taskmanagement.models import Task
 
 # Band Management
-from bandmanagement.models import Band
+from bandmanagement.models import Band, Member
 
 # Create your views here.
 
@@ -24,10 +24,23 @@ def create_task(request, band_id):
         instance = form.save(commit=False)
         instance.band = band
         instance.save()
-        return HttpResponse("Created new task")
+        return HttpResponseRedirect(reverse('listTasks', kwargs={'band_id':band.id}))
     context = {
         'form': form,
         'band': band,
         'members': member_list,
     }
     return render(request, 'task_templates/create.html', context)
+
+@login_required
+def list_tasks(request, band_id):
+    '''list all of a bands tasks'''
+    band = get_object_or_404(Band, pk=band_id)
+    current_member = get_object_or_404(Member, user=request.user, band=band)
+    task_list = band.task_set.all()
+    context = {
+        'band': band,
+        'member': current_member,
+        'tasks': task_list,
+    }
+    return render(request, 'task_templates/list_page.html', context)

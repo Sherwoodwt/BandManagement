@@ -34,3 +34,6 @@ class Task(DateModel):
     finished = models.BooleanField(default=False)
     difficulty = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(5),])
     due_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title

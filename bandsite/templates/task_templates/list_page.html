@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ member}}
+    {{band}} Tasks
 {% endblock %}
 {%block nav%}
 <div>
@@ -22,14 +22,18 @@
 </div>
 {%endblock%}
 {% block content %}
-    
-    <div class="page-header">
-      <a class="btn btn-default" href="{% url 'viewBand' band_id=band.id %}" role="button">back</a>
-      <h1>{{member}}</h1>
-      <small>{{member.picture_url}}</small>
-    </div>
 
-    <a class="btn btn-default" href="{% url 'editMember' member_id=member.id %}" role="button">edit</a>
-    <a class="btn btn-danger" href="{% url 'deleteMember' member_id=member.id %}" role="button">delete</a>
+    <div class="page-header">
+        <a class="btn btn-default" href="{%url 'createTask' band_id=band.id%}" role="button">add+</a>
+        <h1>Tasks</h1>
+        <small>List of all tasks</small>
+    </div>
+    
+    <div class="list-group">
+        {%for task in tasks%}
+            {{task}}
+            {% comment %}<a href="{% url 'viewBand' band_id=band.id %}" class="list-group-item">{{band.name}}</a>{% endcomment %}
+        {%endfor%}
+    </div>
 
 {% endblock %}

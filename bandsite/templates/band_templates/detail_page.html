@@ -3,6 +3,21 @@
 {% block title %}
     {{ band.name }}
 {% endblock %}
+{%block nav%}
+<div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <a class="navbar-brand" href="{% url 'listBands' %}">Band Management</a>
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="{% url 'viewBand' band_id=band.id %}">{{band}}</a>
+            </li>
+            <li>
+                <a href="/accounts/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{%endblock%}
 {% block content %}
     
     <div class="page-header">
