@@ -1,27 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'bandmanagement_base.html' %}
 
 {% block title %}
     {{band}} Tasks
 {% endblock %}
-{%block nav%}
-<div>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <a class="navbar-brand" href="#">Band Management</a>
-        <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="#">Band</a>
-            </li>
-            <li>
-                <a href="#">You</a>
-            </li>
-            <li>
-                <a href="/accounts/logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-{%endblock%}
-{% block content %}
+{% block body %}
 
     <div class="page-header">
         <a class="btn btn-default" href="{%url 'createTask' band_id=band.id%}" role="button">add+</a>

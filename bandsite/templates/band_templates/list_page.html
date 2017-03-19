@@ -1,32 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'bandmanagement_base.html' %}
 
 {% block title %}
     Your Bands
 {% endblock %}
-{%block nav%}
-<div>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <a class="navbar-brand" href="% url 'listBands' %}">Band Management</a>
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="/accounts/logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-{%endblock%}
-{% block content %}
-
-    <div class="page-header">
-        <a class="btn btn-default" href="{%url 'createBand'%}" role="button">add+</a>
-        <h1>Bands</h1>
-        <small>List of all bands</small>
-    </div>
-    
-    <div class="list-group">
-        {%for band in band_list%}
-            <a href="{% url 'viewBand' band_id=band.id %}" class="list-group-item">{{band.name}}</a>
-        {%endfor%}
-    </div>
-
+{% block body %}
+    <table class="table">
+        <tbody>
+            {%for band in bands%}
+            <tr>
+                <td scope="row">{{band.picture_url}}</td>
+                <td>{{band.name}}</td>
+                <td><a class="btn btn-primary" href="#" role="button">Join</a></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
 {% endblock %}

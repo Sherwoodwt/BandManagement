@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
 
 from bandmanagement.views import (
-    list_bands,
+    home,
+    list_all_bands,
     create_band,
     view_band,
     edit_band,
@@ -13,7 +14,8 @@ from bandmanagement.views import (
 )
 
 urlpatterns = [
-    url(r'^$', list_bands, name='listBands'),
+    url(r'^$', home, name='home'),
+    url(r'^bands/$', list_all_bands, name='listAllBands'),
     url(r'^create/$', create_band, name='createBand'),
     url(r'^(?P<band_id>[0-9]+)/$', view_band, name='viewBand'),
     url(r'^(?P<band_id>[0-9]+)/edit/$', edit_band, name='editBand'),

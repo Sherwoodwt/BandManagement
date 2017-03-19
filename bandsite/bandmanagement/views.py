@@ -4,6 +4,8 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
+from django.contrib.auth.models import User
+
 from bandmanagement.models import Band, Member
 from bandmanagement.forms import BandForm, MemberCreateForm
 
@@ -11,11 +13,23 @@ from bandmanagement.forms import BandForm, MemberCreateForm
 
 # Band Views
 @login_required
-def list_bands(request):
-    '''list of all bands'''
+def home(request):
+    '''user can join, create or view their bands'''
+    members = request.user.member_set.all()
+    bands = []
+    for member in members:
+        bands.append(member.band)
+    context = {
+        'bands': bands,
+    }
+    return render(request, 'band_templates/home.html', context)
+
+@login_required
+def list_all_bands(request):
+    '''list of all bands for user to join'''
     bands = Band.objects.all()
     context = {
-        'band_list': bands
+        'bands': bands,
     }
     return render(request, 'band_templates/list_page.html', context)
 
@@ -27,7 +41,7 @@ def create_band(request):
         instance = form.save(commit=False)
         instance.created_by = request.user
         instance.save()
-        return HttpResponseRedirect(reverse('listBands'))
+        return HttpResponseRedirect(reverse('home'))
     context = {
         'form': form,
         'reason': 'Create',
@@ -79,7 +93,7 @@ def delete_band(request, band_id):
     band = get_object_or_404(Band, pk=band_id)
     if(band.created_by == request.user):
         band.delete()
-    return HttpResponseRedirect(reverse('listBands'))
+    return HttpResponseRedirect(reverse('home'))
 
 # Member Views
 @login_required

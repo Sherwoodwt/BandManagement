@@ -1,0 +1,21 @@
+{%extends 'bandmanagement_base.html'%}
+
+{%block Title%}
+    Home
+{%endblock%}
+
+{%block body%}
+    <div>
+        <div>
+            <a class="btn btn-primary" href="{%url 'listAllBands'%}" role="button">Join</a>
+        </div>
+        <div>
+            <a class="btn btn-outline-primary" href="#" role="button">Create</a>
+        </div>
+    </div>
+    <div class="list-group">
+        {%for band in bands%}
+            <a href="#" class="list-group-item list-group-item-action">{{band.name}}</a>
+        {%endfor%}
+    </div>
+{%endblock%}
