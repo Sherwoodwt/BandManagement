@@ -19,5 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^bandmanagement/', include('bandmanagement.urls')),
-    url(r'^accounts/', include('registration.backends.simple.urls'))
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]

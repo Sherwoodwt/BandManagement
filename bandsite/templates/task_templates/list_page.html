@@ -8,13 +8,11 @@
     <div class="page-header">
         <a class="btn btn-default" href="{%url 'createTask' band_id=band.id%}" role="button">add+</a>
         <h1>Tasks</h1>
-        <small>List of all tasks</small>
     </div>
     
     <div class="list-group">
         {%for task in tasks%}
             {{task}}
-            {% comment %}<a href="{% url 'viewBand' band_id=band.id %}" class="list-group-item">{{band.name}}</a>{% endcomment %}
         {%endfor%}
     </div>
 

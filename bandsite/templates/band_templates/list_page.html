@@ -1,7 +1,7 @@
 {% extends 'bandmanagement_base.html' %}
 
 {% block title %}
-    Your Bands
+    All Bands
 {% endblock %}
 {% block body %}
     <table class="table">
@@ -10,7 +10,8 @@
             <tr>
                 <td scope="row">{{band.picture_url}}</td>
                 <td>{{band.name}}</td>
-                <td><a class="btn btn-primary" href="#" role="button">Join</a></td>
+                <td><a class="btn btn-primary" href="{%url 'viewBand' band_id=band.id%}" role="button">View</a></td>
+                <td><a class="btn btn-primary" href="{%url 'addMember' band_id=band.id%}" role="button">Join</a></td>
             </tr>
             {%endfor%}
         </tbody>

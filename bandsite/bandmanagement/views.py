@@ -19,8 +19,12 @@ def home(request):
     bands = []
     for member in members:
         bands.append(member.band)
+    tasks = []
+    for member in members:
+        tasks.append(member.task_set.all())
     context = {
         'bands': bands,
+        'tasks': tasks,
     }
     return render(request, 'band_templates/home.html', context)
 

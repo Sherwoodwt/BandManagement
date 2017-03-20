@@ -10,12 +10,19 @@
             <a class="btn btn-primary" href="{%url 'listAllBands'%}" role="button">Join</a>
         </div>
         <div>
-            <a class="btn btn-outline-primary" href="#" role="button">Create</a>
+            <a class="btn btn-outline-primary" href="{%url 'createBand'%}" role="button">Create</a>
         </div>
     </div>
+    <h1-6><span class="label label-default">Your Bands</span></h1-6>
     <div class="list-group">
         {%for band in bands%}
-            <a href="#" class="list-group-item list-group-item-action">{{band.name}}</a>
+            <a href="{%url 'viewBand' band_id=band.id%}" class="list-group-item list-group-item-action">{{band.name}}</a>
+        {%endfor%}
+    </div>
+    <h1-6><span class="label label-default">Your Tasks</span></h1-6>
+    <div class="list-group">
+        {%for task in tasks%}
+            <a href="#" class="list-group-item list-group-item-action">{{task.title}}</a>
         {%endfor%}
     </div>
 {%endblock%}

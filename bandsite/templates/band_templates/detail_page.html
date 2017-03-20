@@ -6,20 +6,12 @@
 {% block body %}
     
     <div class="page-header">
-      <a class="btn btn-default" href="{% url 'home' %}" role="button">back</a>
       <h1>{{band.name}}</h1>
       <small>{{band.picture_url}}</small>
     </div>
 
     <div>
-        {%if is_member%}
-            <h3>You are in this band.</h3>
-            <a
-                class="btn btn-xs btn-danger"
-                href="{% url 'deleteMember' member_id=member_id %}"
-                role="button"
-            >leave</a>
-        {%else%}
+        {%if not is_member%}
             <h3>You are not in this band.</h3>
             <a
                 class="btn btn-primary"
@@ -27,16 +19,32 @@
                 role="button"
             >join</a>
         {%endif%}
-        <h3></h3>
-        <div class="list-group">
-            <label>Members</label>
-            {% for member in member_list %}
-                <a href="{% url 'viewMember' member_id=member.id %}" class="list-group-item">{{member}}</a>
-            {%endfor%}
+        <div class="card">
+          <div class="card-block text-xs-center">
+            <h4 class="card-title">Members</h4>
+            <div class="list-group">
+                {%for member in member_list%}
+                    <a href="#" class="list-group-item list-group-item-action">{{member}}</a>
+                {%endfor%}
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-block text-xs-center">
+            <h4 class="card-title">Tasks</h4>
+            <a class="btn btn-primary" href="#" role="button">View</a>
+          </div>
         </div>
     </div>
 
-    <a class="btn btn-default" href="{% url 'editBand' band_id=band.id %}" role="button">edit</a>
-    <a class="btn btn-danger" href="{% url 'deleteBand' band_id=band.id %}" role="button">delete</a>
+    {%if is_member%}
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'editBand' band_id=band.id %}" role="button">edit</a>
+        <a
+            class="btn btn-sm btn-outline-danger"
+            href="{% url 'deleteMember' member_id=member_id %}"
+            role="button"
+        >leave</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'deleteBand' band_id=band.id %}" role="button">delete</a>
+    {%endif%}
 
 {% endblock %}
